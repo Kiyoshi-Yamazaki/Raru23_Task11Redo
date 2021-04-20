@@ -42,9 +42,9 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: SecondViewControllerDelegate {
+
     func selectedPrefecture(name: String) {
         selectedPrefectureLabel.text = name
         print("県名", name)
     }
-
 }
