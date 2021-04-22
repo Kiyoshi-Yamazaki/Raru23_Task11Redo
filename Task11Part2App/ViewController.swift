@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func exit(segue: UIStoryboardSegue) {
-        print("遷移したよ")
     }
 
     @IBAction private func didTapChangeButton(_ sender: Any) {
@@ -25,26 +24,25 @@ class ViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifer = segue.identifier else {return}
+        guard let identifer = segue.identifier else { return }
 
-            switch identifer {
-            case "Next":
-                guard let navigationController = segue.destination as? UINavigationController,
-                      let secondViewController = navigationController.topViewController as? SecondViewController else {
-                    return
-                }
-                secondViewController.delegate = self
+        switch identifer {
+        case "Next":
+            guard let navigationController = segue.destination as? UINavigationController,
+                  let secondViewController = navigationController.topViewController as? SecondViewController else {
                 return
-            default:
-                break
             }
+
+            secondViewController.delegate = self
+        default:
+            break
         }
+    }
 }
 
 extension ViewController: SecondViewControllerDelegate {
 
-    func selectedPrefecture(name: String) {
-        selectedPrefectureLabel.text = name
-        print("県名", name)
+    func selectedPrefecture(prefecture: Prefecture) {
+        selectedPrefectureLabel.text = prefecture.name
     }
 }
