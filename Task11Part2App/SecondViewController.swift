@@ -8,13 +8,13 @@
 import UIKit
 
 protocol SecondViewControllerDelegate: AnyObject {
-    func selectedPrefecture(name: String)
+    func selectedPrefecture(prefecture: Prefecture)
 }
 
 class SecondViewController: UIViewController {
 
     @IBOutlet weak private var tableView: UITableView!
-    private let prefectures = Prefecture.Prefectures
+    private let prefectures = Prefecture.prefectures
     weak var delegate: SecondViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class SecondViewController: UIViewController {
 extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Prefecture.Prefectures.count
+        prefectures.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,8 +37,7 @@ extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let name = prefectures[indexPath.row].name
-        delegate?.selectedPrefecture(name: name)
+        delegate?.selectedPrefecture(prefecture: prefectures[indexPath.row])
         performSegue(withIdentifier: "back", sender: nil)
     }
 }
